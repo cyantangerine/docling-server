@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR Document Processing</title>
+</head>
+<body>
+    <h1>Upload PDF Document for OCR Processing</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".pdf" required>
+        <button type="submit">Upload and Process</button>
+    </form>
+    
+    <div id="result" style="margin-top: 20px; display: none;">
+        <h2>Processing Results</h2>
+        <div id="resultFiles"></div>
+    </div>
+    
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('result').style.display = 'block';
+                    const resultFilesDiv = document.getElementById('resultFiles');
+                    resultFilesDiv.innerHTML = '';
+                    
+                    data.files.forEach(file => {
+                        const link = document.createElement('a');
+                        link.href = `/results/${data.result_id}/${file}`;
+                        link.textContent = file;
+                        link.target = '_blank';
+                        
+                        const div = document.createElement('div');
+                        div.appendChild(link);
+                        resultFilesDiv.appendChild(div);
+                    });
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred during processing');
+            });
+        });
+    </script>
+</body>
+</html>

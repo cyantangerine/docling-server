@@ -18,8 +18,6 @@ uv pip install onnxruntime-gpu
 ```
 ```shell
 mkdir models
-```
-```shell
 python download_model.py
 ```
 # Test
@@ -28,5 +26,6 @@ python ocr.py
 ```
 # Run
 ```shell
-
+pip install Flask gunicorn
+gunicorn -w 4 -b 0.0.0.0:8000 app:app
 ```

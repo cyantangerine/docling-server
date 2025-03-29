@@ -4,7 +4,6 @@ from pathlib import Path
 from download_model import download_path
 from docling.datamodel.pipeline_options import PdfPipelineOptions, RapidOcrOptions
 from docling.document_converter import (
-    ConversionResult,
     DocumentConverter,
     InputFormat,
     PdfFormatOption,
@@ -12,8 +11,8 @@ from docling.document_converter import (
 import os
 from docling_core.types.doc import ImageRefMode, PictureItem, TableItem
 
-from docling.datamodel.base_models import FigureElement, InputFormat, Table
-from docling.datamodel.pipeline_options import PdfPipelineOptions, AcceleratorOptions
+from docling.datamodel.base_models import InputFormat
+from docling.datamodel.pipeline_options import PdfPipelineOptions
 from docling.document_converter import DocumentConverter, PdfFormatOption
 
 _log = logging.getLogger(__name__)
@@ -62,12 +61,12 @@ def ocr_docling(doc_path = "./test/1-20.pdf", output_path = 'result', *, image=T
     output_dir.mkdir(parents=True, exist_ok=True)
     doc_filename = conv_res.input.file.stem
 
-    # Save page images
-    for page_no, page in conv_res.document.pages.items():
-        page_no = page.page_no
-        page_image_filename = output_dir / f"{doc_filename}-{page_no}.png"
-        with page_image_filename.open("wb") as fp:
-            page.image.pil_image.save(fp, format="PNG")
+    # # Save page images
+    # for page_no, page in conv_res.document.pages.items():
+    #     page_no = page.page_no
+    #     page_image_filename = output_dir / f"{doc_filename}-{page_no}.png"
+    #     with page_image_filename.open("wb") as fp:
+    #         page.image.pil_image.save(fp, format="PNG")
 
     # Save images of figures and tables
     table_counter = 0
