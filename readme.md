@@ -11,7 +11,7 @@ conda activate docling-server
 ```
 ```shell
 pip install uv
-uv pip install docling rapidocr_onnxruntime
+uv pip install docling rapidocr_onnxruntime Flask gunicorn
 ```
 ```shell
 uv pip install onnxruntime-gpu
@@ -26,6 +26,6 @@ python ocr.py
 ```
 # Run
 ```shell
-pip install Flask gunicorn
 gunicorn -w 4 -b 0.0.0.0:8000 app:app
 ```
+http://127.0.0.1:8000/
