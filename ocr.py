@@ -35,7 +35,7 @@ def ocr_docling(
     output_path = 'output/result', 
     *, 
     image=True, 
-    latex=False, 
+    latex=True, 
     code=True
 ):
     result_obj = {}    

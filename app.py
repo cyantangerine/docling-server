@@ -68,7 +68,7 @@ def upload_file():
         def ocr():
             try:
                 # 调用OCR函数
-                result_obj = ocr_docling(server_path_prefix=result_dir, doc_path=upload_path, output_path=result_dir, image=True, latex=False, code=True)
+                result_obj = ocr_docling(server_path_prefix=result_dir, doc_path=upload_path, output_path=result_dir, image=True, latex=True, code=True)
                 
                 # 获取结果文件列表
                 result_files = os.listdir(result_dir)
