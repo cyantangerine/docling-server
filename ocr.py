@@ -146,7 +146,7 @@ def ocr_docling(
     
     filename = f"original" + os.path.splitext(doc_path)[-1]
     result_obj["origin"] = server_path_prefix + filename
-    shutil.copy(input_doc_path,  output_dir / filename)
+    shutil.move(input_doc_path,  output_dir / filename)
 
     end_time = time.time() - start_time
 
